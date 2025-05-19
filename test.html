@@ -1,80 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Google Style Search Box</title>
-  <style>
-    body {
-      background-color: #f2f2f2;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .search-container {
-      background-color: white;
-      border-radius: 50px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      padding: 10px 20px;
-      width: 100%;
-      max-width: 600px;
-    }
-
-    .search-input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-size: 16px;
-      padding: 10px;
-    }
-
-    .clear-btn, .search-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      margin-left: 10px;
-    }
-
-    .search-btn {
-      background-color: #4285f4;
-      color: white;
-      border-radius: 20px;
-      padding: 6px 16px;
-      font-size: 14px;
-    }
-
-    .clear-btn:hover {
-      color: #999;
-    }
-
-    .search-btn:hover {
-      background-color: #357ae8;
-    }
-  </style>
-</head>
-<body>
-  <div class="search-container">
-    <input type="text" id="searchBox" class="search-input" placeholder="Search Google or type a URL"
-           onkeydown="if(event.key === 'Enter') openSearch()" />
-    <button class="clear-btn" onclick="clearInput()">×</button>
-    <button class="search-btn" onclick="openSearch()">Open</button>
-  </div>
-
+  <title>Google-style Search Box</title>
   <script>
     function openSearch() {
       const input = document.getElementById('searchBox').value.trim();
       if (input) {
-        const isURL = /^https?:\/\//i.test(input);
-        const target = isURL
+        const urlPattern = /^https?:\/\//i;
+        const searchURL = urlPattern.test(input)
           ? input
           : `https://www.google.com/search?q=${encodeURIComponent(input)}`;
-        window.open(target, '_blank');
+        window.open(searchURL, '_blank');
       }
     }
 
@@ -84,5 +22,20 @@
       input.focus();
     }
   </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="bg-white shadow-md rounded-full flex items-center px-4 py-2 w-full max-w-xl">
+    <input id="searchBox"
+           type="text"
+           placeholder="Search Google or type a URL"
+           class="flex-grow outline-none text-lg px-2 py-1"
+           onkeydown="if(event.key === 'Enter') openSearch()" />
+    <button onclick="clearInput()" class="text-gray-400 hover:text-gray-600 px-2">×</button>
+    <button onclick="openSearch()" class="bg-blue-500 text-white rounded-full px-4 py-1.5 text-sm hover:bg-blue-600 ml-2">
+      Open
+    </button>
+  </div>
 </body>
 </html>
+
