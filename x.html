@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  
+</head>
+<body>
+<div class="login-container">
+  <h2>Login</h2>
+  <form onsubmit="validateLogin(event)">
+    <div>
+      <label for="username">Username</label>
+      <input id="username" type="text" required autocomplete="username" />
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input id="password" type="password" required autocomplete="current-password" />
+    </div>
+    <div id="errorMessage" class="error-message"></div>
+    <button type="submit">Log In</button>
+  </form>
+</div>
+
+<div class="search-container" style="display: none;">
+  <input id="searchBox" name="searchBox" type="text" placeholder="Search Google or type a URL" />
+  <button onclick="clearInput()" class="clear-button" aria-label="Clear input">×</button>
+  <button onclick="website()" class="open-button">Open</button>
+</div>
+
+<script>
+function validateLogin(event) {
+  event.preventDefault();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const errorMessage = document.getElementById('errorMessage');
+
+  if (username === 'abood' && password === '123') {
+    const input = prompt("Enter URL...");
+    if (input) {
+      window.open("http://" + input, "_blank");
+    }
+  } else {
+    errorMessage.style.display = 'block';
+    errorMessage.textContent = 'Invalid username or password.';
+  }
+}
+
+    function website() {
+      x = document.getElementById("searchBox").value;
+      window.open("http://" + x)
+    }
+
+  function clearInput() {
+    document.getElementById("searchBox").value = "";
+  }
+</script>
+
+</body>
+</html>
